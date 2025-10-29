@@ -167,7 +167,7 @@ const pintarImagenesDelTag = (tag) => {
 
     //Pintar el resto de imágenes en el container de imagenesRelacionadas
     imgSecundario.innerHTML = "";
-    let fragment1 = document.createElement("FRAGMENT");
+    let fragment1 = document.createDocumentFragment();
     for(let elemento of seleccion.slice(1)){
         fragment1.append(pintarImgSecundarias(elemento,fragment));
     }
@@ -187,16 +187,17 @@ const intercambio = (img) => {
     //Crear y asignar el elemento que va a pasar a ser la imagen principal
     const elementoPeque = encontrarImg(arrayFotos, img.src); 
 
-    //Obtenemos todos los datos necesarios para asignarlo
-    const elementoGrande = encontrarImg(arrayFotos,imgPrincipal.lastElementChild.src);
-
-    let fragment1 = document.createElement("FRAGMENT");
-    fragment1.append(pintarImgSecundarias(elementoGrande,fragment));
-    pintarImgPrincipal(elementoPeque);
-
     //Obtener la Figure (caja) en el container de imagenes relacionadas y eliminarla
     const figuraEliminable = document.querySelector(`#${elementoPeque.id}`);
     figuraEliminable.remove();
+    //Obtenemos todos los datos necesarios para asignarlo
+    const elementoGrande = encontrarImg(arrayFotos,imgPrincipal.lastElementChild.src);
+
+    let fragment1 = document.createDocumentFragment();
+    fragment1.append(pintarImgSecundarias(elementoGrande,fragment));
+    pintarImgPrincipal(elementoPeque);
+
+
 
     //Añadimos la nueva imagen secundaria con el resto de imagenes secundarias
     imgSecundario.append(fragment1);
