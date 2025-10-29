@@ -6,9 +6,9 @@
     -moz-box-sizing: border-box;
 }
 
-body{
+/* body{
 
-}
+} */
 
 img{
     width: 100%;
@@ -28,7 +28,7 @@ h2{
 }
 
 header{
-    background-color: grey;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
     width: 100%;
     padding: 2em;
 }
@@ -41,37 +41,58 @@ header .tituloEncabezado{
 
 .encabezado2{
     text-align: center;
+    padding: 2rem;
+    background-image: linear-gradient(rgba(249, 249, 252, 0.7), rgba(247, 247, 244, 0.6)), url("../assets/imagenescss/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
+
+/* .encabezado2 div{
+    display: inline-block;
+    background-color: rgb(40, 40, 40);
+    padding: 0.5rem;
+    border-radius: 10px;
+} */
+
+/* .encabezado2 h1{
+    color: white;
+} */
+
 .encabezado2 p{
     font-size: 2rem;
     padding-bottom: 1rem;
+    /* color: white; */
 }
 
 .menu{
     text-align: center;  
 }
 
-.menu ul{
+.menu .botonContainer{
     list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem;
 }
 
-.redirecciones ul li{
-    display: inline-block;
-    margin: 0 0.5rem;
-}
+
 
 .btn {
-    display: inline-block;
-    background: grey; 
+    background-color: rgb(68, 67, 67);
     color: #fff;
     padding: 0.75rem 1.25rem;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    margin: 0.5rem;
 }
 
 .btn:hover {
-    background-color: #4d4d4d; 
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    cursor: pointer;
 }
 
 .imagenPrincipal{
@@ -109,6 +130,11 @@ header .tituloEncabezado{
     margin: 1rem;
 }
 
+.imagenRelacionadas .imagenes figure:hover{
+    scale:1.01;
+    cursor: pointer;
+}
+
 .imagenRelacionadas .imagenes figure p{
     text-align: center;
 }
@@ -121,7 +147,7 @@ header .tituloEncabezado{
 
 footer{
     width: 100%;
-    background-color: grey;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
     color: white;
     padding: 1rem;
 }
@@ -134,12 +160,25 @@ footer p{
                             768px
 #########################################################*/
 @media screen and (min-width: 768px) {
+    .menu .botonContainer{
+        display: block;
+    }
+
+    .menu .botonContainer li{
+        display: inline-block;
+        margin: 0 0.5rem;
+    }
+
     .imagenPrincipal{
         width: 85%;
     }
 
     .imagenRelacionadas .imagenes{
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .imagenRelacionadas .imagenes figure:hover{
+        scale:1.02;
     }
 
     
@@ -149,12 +188,20 @@ footer p{
                             992px
 #########################################################*/
 @media screen and (min-width: 992px) {
+    .encabezado2{
+        background-image: linear-gradient(rgba(249, 249, 252, 0.7), rgba(247, 247, 244, 0.6)), url("../assets/imagenescss/fondo_grande.jpg");
+    }
+
     .imagenPrincipal{
         width: 75%;
     }
 
     .imagenRelacionadas .imagenes{
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .imagenRelacionadas .imagenes figure:hover{
+        scale:1.04;
     }
     
 }/*992*/
@@ -171,5 +218,12 @@ footer p{
     .imagenRelacionadas .imagenes{
         grid-template-columns: repeat(4, 1fr);
     }
+
+    .imagenRelacionadas .imagenes figure:hover{
+        scale:1.06;
+    }
     
 }/*1200*/
+
+
+
