@@ -33,6 +33,7 @@ El diseño es responsive y se adapta correctamente a diferentes tamaños de pant
 
 ## Estructura del proyecto
 
+```
 proyecto-filtro
 ├── index.html
 ├── css/
@@ -52,6 +53,7 @@ proyecto-filtro
 │ ├── fondo.jpg
 │ └── fondo_grande.jpg
 └── README.md
+```
 
 ---
 
