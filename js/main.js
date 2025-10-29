@@ -59,47 +59,51 @@ const arrayFotos = [
 const menu = document.querySelector("#botonContainer");
 const imgPrincipal = document.querySelector("#imagenPrincipal");
 const imgSecundario = document.querySelector("#imagenesRelacionadas");
-
+const numero = document.querySelector("#numero");
+const category = document.querySelector("#category");
+const oculto = document.querySelector(".oculto");
 
 
 /*    Eventos   */
 
-//Pulsar categoria seleccionar las fotos
 document.addEventListener('click', (ev) => {
-    if(ev.target.classList.contains('btn')){
+    //Pulsar categoria seleccionar las fotos
+    if(ev.target.classList.contains('btn')){    //Si es un boton
+        // Pintamos las imagenes seleccionadas
         pintarImagenesDelTag(ev.target.textContent);
     }
 
-    if(ev.target.classList.contains('intercambio')){
-        console.log(ev.target);
+    //Pulsar una foto Relacionada
+    if(ev.target.classList.contains('intercambio')){//Si es una imagen relacionada
+        // La cambiamos con la principal
         intercambio(ev.target);
     }
 })
 
 
-//Pulsar las fotos de abajo cambiar a primer plano
-// document.addEventListener('click', (ev) => {
-//     if(ev.target.classList.contains('intercambio')){
-//         console.log("cambiar Imagen");
-//         //intercambio(ev.target);
-//     }
-// })
-
-
 
 /*    Funciones   */
-
-//Funcion para selecionar los tags y pintar los botones
-const pintarBotones = () =>{
+//Funcion para obtener una lista de tags ordenada alfabeticamente pasandole como parametro el array
+const obtenerTagsUnicos = (array) => {
     let tags = [];
-    for(let viaje of arrayFotos){
+    //recorremos el Array de la propiedad Categoria de cada elemento del Array arrayfotos para conseguir los tags sin repetirlos
+    for(let viaje of array){
         for(let tag of viaje.categorias){
             if(!tags.includes(tag)){
                 tags.push(tag)
             }
         }
     }
+    return tags.sort();
+}
 
+//Funcion para selecionar los tags y pintar los botones
+const pintarBotones = () =>{
+
+    //Obtener las categorias
+    const tags = obtenerTagsUnicos(arrayFotos)
+
+    //Recorremos el Array de tags sin repetir Ordenados alfabéticamente e ir añadiendo los botones al fragmento
     for(let tag of tags.sort()){
         const boton = document.createElement("LI");
         boton.classList.add("btn");
@@ -109,88 +113,93 @@ const pintarBotones = () =>{
         fragment.append(boton)
     }
 
+    //Añadir el fragmento al dom
     menu.append(fragment)
 }
 
 //Función para filtrar las fotos en base al tag
 const filtrarArrayEnBaseAlTag = (tag) => arrayFotos.filter(elemento => elemento.categorias.includes(tag))
 
+//Funcion para pintar el texto
+const pintarTextoTag = (array,tag) => {
+    numero.textContent = array.length;
+    category.textContent = tag;
+    oculto.style.display = "block";
+}
+
+//Funcion para pintar la img Principal
+const pintarImgPrincipal = (elemento) => {
+    //Pintar la primera imagen en su respectivo container
+    imgPrincipal.innerHTML = "";
+    const imagenPrincipal = document.createElement("IMG");
+    const tituloImg = document.createElement("P");
+    tituloImg.textContent = elemento.titulo;
+    imagenPrincipal.src = elemento.src;
+    imagenPrincipal.alt = elemento.alt;
+    imgPrincipal.append(tituloImg, imagenPrincipal);
+}
+
+//Funcion para pintar las fotos secundarias
+const pintarImgSecundarias = (elemento, fragment) => {
+    const figuraSecundaria = document.createElement("FIGURE");
+    figuraSecundaria.id = elemento.id;
+    const imagenSecundaria = document.createElement("IMG");
+    imagenSecundaria.classList.add("intercambio");
+    const titleImg = document.createElement("P");
+    titleImg.textContent = elemento.titulo;
+    imagenSecundaria.src = elemento.src;
+    imagenSecundaria.alt = elemento.alt;
+    figuraSecundaria.append(titleImg,imagenSecundaria);
+    fragment.append(figuraSecundaria);
+    return fragment;
+}
 
 //Funcion para pintar las fotos de la etiqueta seleccionada
 const pintarImagenesDelTag = (tag) => {
-    
+    //Conseguir el array filtrado en base al tag
     const seleccion = filtrarArrayEnBaseAlTag(tag);
-    //Pintar imagen Grande sleccion[0]
-    imgPrincipal.innerHTML = ""; //vaciar el contenido anterior
-    const textoMatches = document.createElement("P");
-    textoMatches.innerHTML = `Se han encontrado <span class="negrita">${seleccion.length}</span> imágenes de la categoría <span class="negrita">${tag}</span>`;
-    const figuraPrincipal = document.createElement("FIGURE");
-    figuraPrincipal.id = 'imgGrande';
-    const imagenPrincipal = document.createElement("IMG");
-    const tituloImg = document.createElement("P");
-    tituloImg.textContent = seleccion[0].titulo;
-    imagenPrincipal.src = seleccion[0].src;
-    imagenPrincipal.alt = seleccion[0].alt;
-    figuraPrincipal.append(tituloImg);
-    figuraPrincipal.append(imagenPrincipal);
-    imgPrincipal.append(textoMatches,figuraPrincipal);
 
-    //Pintar el sobrante
+    //Pintar el texto especial
+    pintarTextoTag(seleccion, tag);
+
+    //Pintar la imagen principal
+    pintarImgPrincipal(seleccion[0]);
+
+    //Pintar el resto de imágenes en el container de imagenesRelacionadas
     imgSecundario.innerHTML = "";
+    let fragment1 = document.createElement("FRAGMENT");
     for(let elemento of seleccion.slice(1)){
-        const figuraSecundaria = document.createElement("FIGURE");
-        figuraSecundaria.id = elemento.id;
-        const imagenSecundaria = document.createElement("IMG");
-        imagenSecundaria.classList.add("intercambio");
-        const titleImg = document.createElement("P");
-        titleImg.textContent = elemento.titulo;
-        imagenSecundaria.src = elemento.src;
-        imagenSecundaria.alt = elemento.alt;
-        figuraSecundaria.append(titleImg,imagenSecundaria);
-        fragment.append(figuraSecundaria);
+        fragment1.append(pintarImgSecundarias(elemento,fragment));
     }
-    imgSecundario.append(fragment);
+
+    //Añadir el fragmento de imágenes relacionadas en el dom
+    imgSecundario.append(fragment1);
 }
 
-//Funcion para intercambiar foto secundaria con principal
+//Funcion para encontrar el elementos de un array con el mismo src pasandole como parametro el array y el src
+const encontrarImg = (array,src) => {
+    return array.find(elemento => src.includes(elemento.src))
+}
+
+//Funcion para intercambiar foto secundaria con principal pasando como parametro la img clicada
 const intercambio = (img) => {
 
-    const figurePeque = document.createElement("FIGURE");
-    figurePeque.id = "imgGrande";
-    const titlePeque = document.createElement("P");
+    //Crear y asignar el elemento que va a pasar a ser la imagen principal
+    const elementoPeque = encontrarImg(arrayFotos, img.src); 
 
-    const elementoPeque = arrayFotos.find(elemento => img.src.includes(elemento.src)); 
-    titlePeque.textContent = elementoPeque.titulo;
+    //Obtenemos todos los datos necesarios para asignarlo
+    const elementoGrande = encontrarImg(arrayFotos,imgPrincipal.lastElementChild.src);
 
-    const imgPeque = document.createElement("IMG");
-    imgPeque.src = elementoPeque.src;
-    imgPeque.alt = elementoPeque.alt;
+    let fragment1 = document.createElement("FRAGMENT");
+    fragment1.append(pintarImgSecundarias(elementoGrande,fragment));
+    pintarImgPrincipal(elementoPeque);
 
-    figurePeque.append(titlePeque,imgPeque);
-    fragment.append(figurePeque);
+    //Obtener la Figure (caja) en el container de imagenes relacionadas y eliminarla
     const figuraEliminable = document.querySelector(`#${elementoPeque.id}`);
     figuraEliminable.remove();
 
-
-    const imagenGrande = document.querySelector("#imgGrande");
-
-    const figureGrande = document.createElement("FIGURE");
-    const elementoGrande = arrayFotos.find(elemento => imagenGrande.lastElementChild.src.includes(elemento.src));
-    figureGrande.id = elementoGrande.id;
-    const titleGrande = document.createElement("P");
-    //console.log(imagenGrande)
-    titleGrande.textContent = imagenGrande.firstElementChild.textContent; 
-
-    const imgGrande = document.createElement("IMG");
-    imgGrande.classList.add("intercambio");
-    imgGrande.src = imagenGrande.lastElementChild.src;
-    imgGrande.alt = imagenGrande.lastElementChild.alt;
-    figureGrande.append(titleGrande,imgGrande);
-
-
-    imagenGrande.remove();
-    imgPrincipal.append(fragment);
-    imgSecundario.append(figureGrande);
+    //Añadimos la nueva imagen secundaria con el resto de imagenes secundarias
+    imgSecundario.append(fragment1);
 }
 
 /*    Invocaciones   */

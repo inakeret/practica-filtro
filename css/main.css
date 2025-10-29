@@ -1,226 +1,262 @@
+/*Setear los valores predefinidos por los navegadores*/
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;/*margen*/
+    padding: 0;/*padding*/
+    box-sizing: border-box;/*border o content*/
+    /*Para otros navegadores*/
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
 }
 
-/* body{
-
-} */
-
+/*Dar de manera general espacificaciones para las etiquetas*/
 img{
-    width: 100%;
+    width: 100%;/*Ancho completo del contenedro padre*/
 }
 
 h1{
-    text-align: center;
-    padding: 0.8rem;
+    text-align: center;/*texto centrado*/
+    padding: 0.8rem;/*Padding incluido*/
 }
 
 h2{
-    margin: 1rem;
+    margin: 1rem;/*Margin*/
 }
 
 .negrita{
-    font-weight: bold;
+    font-weight: bold;/*Letra en negrita*/
 }
 
+
+/***********************
+Header
+************************/
+
+/*Dar aspecto al header*/
 header{
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
-    width: 100%;
-    padding: 2em;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);/*Pintar el bacgraond con dos colores*/
+    width: 100%;/*Ancho del 100%*/
+    padding: 2em;/*Padding incluido*/
 }
 
+/*Dar estilo al texto del header*/
 header .tituloEncabezado{
-    text-align: center;
-    color: white;
-    font-size: 3rem;
+    text-align: center;/*Centra texto*/
+    color: white;/*Color de letra*/
+    font-size: 3rem;/*Tamaño de letra*/
 }
 
+/***********************
+Titulos y menu
+************************/
+
+/*Dar estilo a los titulos y al menu*/
 .encabezado2{
-    text-align: center;
-    padding: 2rem;
-    background-image: linear-gradient(rgba(249, 249, 252, 0.7), rgba(247, 247, 244, 0.6)), url("../assets/imagenescss/fondo.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    text-align: center;/*Centrar los textos*/
+    padding: 2rem;/*Añadir padding*/
+    background-image: linear-gradient(rgba(249, 249, 252, 0.7), rgba(247, 247, 244, 0.6)), url("../assets/imagenescss/fondo.jpg");/*Imagen de fondo*/
+    background-repeat: no-repeat; /*para que solo salga una vez y no se repita*/
+    background-size: cover;/*para que cubra todo el ancho*/
+    background-position: center;/*para centrar la foto en la ventana*/
 }
 
-/* .encabezado2 div{
-    display: inline-block;
-    background-color: rgb(40, 40, 40);
-    padding: 0.5rem;
-    border-radius: 10px;
-} */
-
-/* .encabezado2 h1{
-    color: white;
-} */
-
+/*Dar estilo al texto "categorias"*/
 .encabezado2 p{
-    font-size: 2rem;
-    padding-bottom: 1rem;
-    /* color: white; */
+    font-size: 2rem;/*Tamaño de letra*/
+    padding-bottom: 1rem;/*Padding abajo*/
 }
 
+/*centrar los textos del menu*/
 .menu{
     text-align: center;  
 }
 
+/*Dar estilo al menu*/
 .menu .botonContainer{
-    list-style: none;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 1rem;
+    list-style: none;/*Quitar los puntos predefinidos para las listas en los navegadores*/
+    display: flex;/*Propiedad para distribuir a los hijos*/
+    justify-content: flex-start;/*Ajustar los contenidos para que empiezen desde arriba*/
+    flex-direction: column;/*darle direccion de columna*/
+    align-items: flex-start;/*Que los elementos esten a la izquierda*/
+    margin: 1rem;/*Margen*/
 }
 
-
-
+/*Estilo de los botones*/
 .btn {
-    background-color: rgb(68, 67, 67);
-    color: #fff;
-    padding: 0.75rem 1.25rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 0.5rem;
+    background-color: rgb(68, 67, 67);/*Color de fondo*/
+    color: #fff;/*Color de la letra*/
+    padding: 0.75rem 1.25rem;/*Padding arriba/abajo: 0.75 y izq/der:1.25*/
+    border-radius: 5px;/*Redondear los bordes*/
+    text-decoration: none;/*Quitar estilos distintos de letra*/
+    font-weight: bold;/*Poner en negrita la letra de dentro*/
+    margin: 0.5rem;/*Margen*/
 }
 
+/*Cuando el usuario pasa el cusor por el btn*/
 .btn:hover {
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
-    cursor: pointer;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);/*Cambiar el color de fondo a uno con gradiente*/
+    cursor: pointer;/*Que la flecha se convierta en pointer*/
 }
 
+
+/***********************
+Imagen principal
+************************/
+
+/*Contenedor de la imagen principal*/
 .imagenPrincipal{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px auto;
-    width: 95%;
-
+    display: flex;/*Propiedad para poder distribuir los hijos*/
+    flex-direction: column;/*Direccion en columna*/
+    align-items: center;/*Hijos centrados*/
+    margin: 20px auto;/*Centrados en el contenedor*/
+    width: 95%;/*ocupando un 95% del ancho*/
 }
 
+/*Que la figura ocupe el 100% del ancho*/
 .imagenPrincipal figure{
     width: 100%;
 }
 
+/*Texto de las fotos encontradas 'x' de la categoria 'y'*/
 .imagenPrincipal > p{
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-
+    font-size: 1.2rem;/*Tamaño de letra*/
+    margin-bottom: 1rem;/*Margen abajo*/
+    display: none;/*Oculto luego desde js lo pintamos*/
 }
 
+/*Titulo de la foto principal*/
 .imagenPrincipal figure p{
-    font-size: 1.1rem;
-    text-align: center;
+    font-size: 1.1rem;/*Tamaño de letra*/
+    text-align: center;/*Centrar el texto*/
 }
 
+/***********************
+Imagenes Relacionadas
+************************/
+
+/*Container de las imagenes relacionadas*/
 .imagenRelacionadas .imagenes{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
-    justify-content: start; 
+    display: grid;/*Propiedad para colocar a los hijos*/
+    grid-template-columns: repeat(1, 1fr);/*1 unica columna*/
+    gap: 1rem;/*Espacio entre los hijos*/
+    justify-content: start; /*Aliniearlos a la izquierda pq es columna*/
 }
 
+/*Cada figura de las imagenes relacionadas*/
 .imagenRelacionadas .imagenes figure{
-    margin: 1rem;
+    margin: 1rem;/*margen*/
 }
 
+/*Cuando el cursor pase por la figura*/
 .imagenRelacionadas .imagenes figure:hover{
-    scale:1.01;
-    cursor: pointer;
+    scale:1.01;/*Agrandar la figura 1%*/
+    cursor: pointer;/*Cursor modo pointer*/
 }
 
+/*Titulo de las imagenes relacionadas*/
 .imagenRelacionadas .imagenes figure p{
-    text-align: center;
+    text-align: center;/*centrar el texto*/
 }
 
-
-
+/*Imagenes relacionadas dentro del figure*/
 .imagenRelacionadas .imagenes figure img{
-    border-radius: 2rem;
+    border-radius: 2rem;/*Bordes redondeados*/
 }
 
+
+/***********************
+Footer
+************************/
+
+/*Footer*/
 footer{
-    width: 100%;
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
-    color: white;
-    padding: 1rem;
+    width: 100%;/*Todo el ancho del body*/
+    background-image: linear-gradient(to right, #434343 0%, black 100%);/*color de fondo con gradiente*/
+    color: white;/*Color de latra*/
+    padding: 1rem;/*padding*/
 }
 
+/*Texto del footer*/
 footer p{
-    text-align: center;
+    text-align: center;/*Texto centrado*/
 }
 
 /*#######################################################
-                            768px
+        Cuando la pantalla se mas grande de768px
 #########################################################*/
 @media screen and (min-width: 768px) {
+    /*Que la lista de botones se coloquen en horizontal*/
     .menu .botonContainer{
         display: block;
     }
 
-    .menu .botonContainer li{
-        display: inline-block;
-        margin: 0 0.5rem;
+    /*Cada boton*/
+    .menu .botonContainer .btn{
+        display: inline-block;/* para que se coloquen en horizontal*/
+        margin: 0 0.5rem;/*Margen entre los botones*/
     }
 
+    /*Contenedor Imagen Principal*/
     .imagenPrincipal{
-        width: 85%;
+        width: 85%;/*Que se haga mas pequeño*/
     }
 
+    /*Contenedor de imagenes relacionadas*/
     .imagenRelacionadas .imagenes{
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);/*Que se dividan en dos columnas*/
     }
 
+    /*Cuando el cursor pasa por las imagenes relacionadas*/
     .imagenRelacionadas .imagenes figure:hover{
-        scale:1.02;
+        scale:1.02;/*Agrandar el tamaño un 2%*/
     }
 
     
 }/*768*/
 
 /*#######################################################
-                            992px
+        Cuando la pantalla se mas grande de 992px
 #########################################################*/
 @media screen and (min-width: 992px) {
+    /*Cambiar la imagen del header a una de mayor tamaño*/
     .encabezado2{
         background-image: linear-gradient(rgba(249, 249, 252, 0.7), rgba(247, 247, 244, 0.6)), url("../assets/imagenescss/fondo_grande.jpg");
     }
 
+    /*Hacer mas pequeño el contenedor de la imagen principal*/
     .imagenPrincipal{
         width: 75%;
     }
 
+    /*Dividir en 3 columnas las imagenes relacionadas*/
     .imagenRelacionadas .imagenes{
         grid-template-columns: repeat(3, 1fr);
     }
 
+    /*Al pasar el cursor por las figuras Relacionadas*/
     .imagenRelacionadas .imagenes figure:hover{
-        scale:1.04;
+        scale:1.04;/*Agrandar un 4%*/
     }
     
 }/*992*/
 
 
 /*#######################################################
-                            1200px
+        Cuando la pantalla se mas grande de 1200px
 #########################################################*/
 @media screen and (min-width: 1200px) {
+    /*Hacer mas pequeña la imagen principal*/
     .imagenPrincipal{
         width: 65%;
     }
 
+    /*Dividir las imagenes elacionadas en cuatro columnas*/
     .imagenRelacionadas .imagenes{
         grid-template-columns: repeat(4, 1fr);
     }
 
+    /*Cuando el cursor pase por imagenes relacionadas*/
     .imagenRelacionadas .imagenes figure:hover{
-        scale:1.06;
+        scale:1.06;/*Que se agrande un 4%*/
     }
     
 }/*1200*/
